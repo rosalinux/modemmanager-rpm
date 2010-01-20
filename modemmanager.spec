@@ -1,10 +1,15 @@
-%define snapshot 20090826
+%define snapshot 0
 %define srcname ModemManager
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	0.2
+Version:	0.3
+%if %{snapshot}
 Release:	%mkrel 0.%{snapshot}.1
+%else
+Release:	%mkrel 1
+%endif
+%if %snapshot
 #
 # Source from git://anongit.freedesktop.org/ModemManager/ModemManager
 # tarball built with:
@@ -12,6 +17,9 @@ Release:	%mkrel 0.%{snapshot}.1
 #    make distcheck
 #
 Source:		%{srcname}-%{version}-%{snapshot}.tar.bz2
+%else
+Source:		http://cgit.freedesktop.org/ModemManager/ModemManager/snapshot/%{srcname}-%{version}.tar.bz2
+%endif
 License:	GPLv2+
 Group:		System/Configuration/Networking
 URL:		http://www.gnome.org/projects/NetworkManager/
@@ -19,6 +27,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	glib2-devel
 BuildRequires:	dbus-glib-devel >= 0.75
 BuildRequires:	libgudev-devel >= 143
+BuildRequires:	ppp
 
 %description
 The ModemManager service provides a consistent API to operate many different
@@ -28,10 +37,17 @@ modems, including mobile broadband (3G) devices.
 %setup -q -n %{srcname}-%{version}
 
 %build
+autoreconf -fis
+pppver=`rpm -q --qf "%{VERSION}" ppp`
+pppddir=%{_libdir}/pppd/$pppver
 %configure2_5x \
 	--enable-more-warnings=yes \
 	--with-udev-base-dir=/lib/udev \
-	--disable-static
+	--with-tests=yes \
+	--with-docs=yes \
+	--disable-static \
+	--with-pppd-plugin-dir="$pppddir"
+
 %make
 
 %check
@@ -41,6 +57,11 @@ modems, including mobile broadband (3G) devices.
 rm -rf %{buildroot}
 %makeinstall_std
 rm -f %{buildroot}%{_libdir}/%{srcname}/*.la
+
+# only used by test suite
+rm -f %{buildroot}%{_libdir}/%{name}/*.la
+rm -f %{buildroot}%{_libdir}/pppd/2.*/*.la
+rm -f %{buildroot}%{_libdir}/pppd/2.*/*.so
 
 %clean
 rm -rf %{buildroot}
