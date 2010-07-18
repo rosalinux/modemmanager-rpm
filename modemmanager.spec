@@ -3,7 +3,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	0.3
+Version:	0.4
 %if %{snapshot}
 Release:	%mkrel 0.%{snapshot}.1
 %else
