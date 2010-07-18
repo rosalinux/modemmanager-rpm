@@ -27,6 +27,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	glib2-devel
 BuildRequires:	dbus-glib-devel >= 0.75
 BuildRequires:	gettext-devel
+BuildRequires:	intltool
 BuildRequires:	libgudev-devel >= 143
 BuildRequires:	ppp
 BuildRequires:	xsltproc
