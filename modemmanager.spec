@@ -74,6 +74,8 @@ rm -rf %{buildroot}
 %doc README AUTHORS
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.ModemManager.conf
 %{_datadir}/dbus-1/system-services/org.freedesktop.ModemManager.service
+%{_datadir}/icons/hicolor/22x22/apps/modem-manager.png
+%{_datadir}/polkit-1/actions/org.freedesktop.modem-manager.policy
 %attr(0755,root,root) %{_sbindir}/modem-manager
 %dir %{_libdir}/%{srcname}
 %attr(0755,root,root) %{_libdir}/%{srcname}/*.so*
