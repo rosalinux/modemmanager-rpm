@@ -40,11 +40,11 @@ modems, including mobile broadband (3G) devices.
 %setup -q -n %{srcname}-%{version}
 
 %build
-autoreconf -fis
+autoreconf -fi
 pppver=`rpm -q --qf "%{VERSION}" ppp`
 pppddir=%{_libdir}/pppd/$pppver
 %configure2_5x \
-	--enable-more-warnings=yes \
+	--enable-more-warnings=no \
 	--with-udev-base-dir=/lib/udev \
 	--with-tests=yes \
 	--with-docs=yes \
