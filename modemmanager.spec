@@ -8,11 +8,11 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/ModemManager/0.5/%{srcname}-%{ve
 License:	GPLv2+
 Group:		System/Configuration/Networking
 URL:		http://www.gnome.org/projects/NetworkManager/
-BuildRequires:	glib2-devel
-BuildRequires:	dbus-glib-devel >= 0.75
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
-BuildRequires:	libgudev-devel >= 143
+BuildRequires:	pkgconfig(gudev-1.0)
 BuildRequires:	ppp
 BuildRequires:	xsltproc
 
