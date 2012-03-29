@@ -1,29 +1,13 @@
-%define snapshot 0
 %define srcname ModemManager
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	0.4
-%if %{snapshot}
-Release:	%mkrel 0.%{snapshot}.2
-%else
-Release:	%mkrel 2
-%endif
-%if %snapshot
-#
-# Source from git://anongit.freedesktop.org/ModemManager/ModemManager
-# tarball built with:
-#    ./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var
-#    make distcheck
-#
-Source:		%{srcname}-%{version}-%{snapshot}.tar.bz2
-%else
-Source:		http://cgit.freedesktop.org/ModemManager/ModemManager/snapshot/%{srcname}-%{version}.tar.bz2
-%endif
+Version:	0.5.2.0
+Release:	1
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/ModemManager/0.5/%{srcname}-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Networking
 URL:		http://www.gnome.org/projects/NetworkManager/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	glib2-devel
 BuildRequires:	dbus-glib-devel >= 0.75
 BuildRequires:	gettext-devel
