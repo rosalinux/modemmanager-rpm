@@ -41,17 +41,7 @@ pppddir=%{_libdir}/pppd/$pppver
 %make check
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
-rm -f %{buildroot}%{_libdir}/%{srcname}/*.la
-
-# only used by test suite
-rm -f %{buildroot}%{_libdir}/%{name}/*.la
-rm -f %{buildroot}%{_libdir}/pppd/2.*/*.la
-rm -f %{buildroot}%{_libdir}/pppd/2.*/*.so
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(0644, root, root, 0755)
