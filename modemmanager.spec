@@ -43,13 +43,19 @@ pppddir=%{_libdir}/pppd/$pppver
 %install
 %makeinstall_std
 
+# only used by test suite
+rm -f %{buildroot}%{_libdir}/pppd/2.*/*.so
+
 %files
 %defattr(0644, root, root, 0755)
 %doc README AUTHORS
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.ModemManager.conf
+%{_datadir}/dbus-1/interfaces/*.xml
 %{_datadir}/dbus-1/system-services/org.freedesktop.ModemManager.service
 %{_datadir}/icons/hicolor/22x22/apps/modem-manager.png
 %{_datadir}/polkit-1/actions/org.freedesktop.modem-manager.policy
+%dir %{_includedir}/mm
+%{_includedir}/mm/mm-modem.h
 %attr(0755,root,root) %{_sbindir}/modem-manager
 %dir %{_libdir}/%{srcname}
 %attr(0755,root,root) %{_libdir}/%{srcname}/*.so*
