@@ -22,9 +22,9 @@ modems, including mobile broadband (3G) devices.
 
 %prep
 %setup -q -n %{srcname}-%{version}
+autoreconf -fi
 
 %build
-autoreconf -fi
 pppver=`rpm -q --qf "%{VERSION}" ppp`
 pppddir=%{_libdir}/pppd/$pppver
 %configure2_5x \
