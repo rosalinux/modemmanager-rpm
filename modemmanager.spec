@@ -2,9 +2,9 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	0.5.2.0
+Version:	0.6.0.0
 Release:	1
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/ModemManager/0.5/%{srcname}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/ModemManager/0.6/%{srcname}-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Networking
 URL:		http://www.gnome.org/projects/NetworkManager/
@@ -52,11 +52,43 @@ rm -f %{buildroot}%{_libdir}/pppd/2.*/*.so
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.ModemManager.conf
 %{_datadir}/dbus-1/interfaces/*.xml
 %{_datadir}/dbus-1/system-services/org.freedesktop.ModemManager.service
-%{_datadir}/icons/hicolor/22x22/apps/modem-manager.png
-%{_datadir}/polkit-1/actions/org.freedesktop.modem-manager.policy
 %dir %{_includedir}/mm
-%{_includedir}/mm/mm-modem.h
+%{_includedir}/mm/ModemManager.h
 %attr(0755,root,root) %{_sbindir}/modem-manager
 %dir %{_libdir}/%{srcname}
 %attr(0755,root,root) %{_libdir}/%{srcname}/*.so*
 /lib/udev/rules.d/*
+
+
+%changelog
+* Thu Mar 29 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.5.2.0-1
++ Revision: 788069
+- do autoreconf in %%prep
+- clean out old junk
+- use pkgconfig() deps for buildrequires
+- new version
+
+* Fri May 06 2011 Funda Wang <fwang@mandriva.org> 0.4-2
++ Revision: 669921
+- disable werror
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - mass rebuild
+
+* Sun Jul 18 2010 Andrey Borzenkov <arvidjaar@mandriva.org> 0.4-1mdv2011.0
++ Revision: 554818
+- fix unpackaged files
+- buildrequires intltool
+- buildrequires gettext-devel
+- new version
+
+* Wed Jan 20 2010 Frederik Himpe <fhimpe@mandriva.org> 0.3-1mdv2010.1
++ Revision: 494267
+- Fix BuildRequires
+- Update to new version 0.3
+
+* Wed Nov 11 2009 Frederik Himpe <fhimpe@mandriva.org> 0.2-0.20090826.1mdv2010.1
++ Revision: 464873
+- Import package based on Fedora's package
+- create modemmanager
+
