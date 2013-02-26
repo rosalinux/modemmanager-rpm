@@ -1,41 +1,67 @@
+%define	_disable_ld_no_undefined 1
+%define url_ver %(echo %{version}|cut -d. -f1,2)
+
+%define pppver	%(rpm -q --qf "%{VERSION}" ppp)
+%define pppddir	%{_libdir}/pppd/%{pppver}
 %define srcname ModemManager
+
+%define	major	0
+%define	libname	%mklibname mm-glib %{major}
+%define	devname	%mklibname mm-glib -d
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	0.6.0.0
+Version:	0.7.990
 Release:	1
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/ModemManager/0.6/%{srcname}-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Networking
-URL:		http://www.gnome.org/projects/NetworkManager/
-BuildRequires:	pkgconfig(glib-2.0)
-BuildRequires:	pkgconfig(dbus-glib-1)
-BuildRequires:	gettext-devel
+Url:		http://www.gnome.org/projects/NetworkManager/
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/ModemManager/%{url_ver}/%{srcname}-%{version}.tar.xz
+
+BuildRequires:	dia
 BuildRequires:	intltool
-BuildRequires:	pkgconfig(gudev-1.0)
 BuildRequires:	ppp
 BuildRequires:	xsltproc
+BuildRequires:	gettext-devel
+BuildRequires:	pkgconfig(dbus-glib-1)
+BuildRequires:	pkgconfig(glib-2.0)
+BuildRequires:	pkgconfig(gudev-1.0)
+BuildRequires:	pkgconfig(polkit-gobject-1)
+BuildRequires:	pkgconfig(qmi-glib)
 
 %description
 The ModemManager service provides a consistent API to operate many different
 modems, including mobile broadband (3G) devices.
 
+%package -n %{libname}
+Summary:	Shared libraries for %{name}
+Group:		System/Libraries
+
+%description -n %{libname}
+Shared libraries for %{name}.
+
+%package -n %{devname}
+Summary:	Development package for %{name}
+Group:		Development/Other
+Requires:	%{libname} = %{version}-%{release}
+
+%description -n %{devname}
+Files for development with %{name}.
+
 %prep
-%setup -q -n %{srcname}-%{version}
-autoreconf -fi
+%setup -qn %{srcname}-%{version}
 
 %build
-pppver=`rpm -q --qf "%{VERSION}" ppp`
-pppddir=%{_libdir}/pppd/$pppver
 %configure2_5x \
+	--disable-static \
 	--enable-more-warnings=no \
 	--with-udev-base-dir=/lib/udev \
+	--with-polkit=yes \
 	--with-tests=yes \
 	--with-docs=yes \
-	--disable-static \
-	--with-pppd-plugin-dir="$pppddir"
+	--with-pppd-plugin-dir="%{pppddir}"
 
-%make
+%make 
 
 %check
 %make check
@@ -44,51 +70,33 @@ pppddir=%{_libdir}/pppd/$pppver
 %makeinstall_std
 
 # only used by test suite
-rm -f %{buildroot}%{_libdir}/pppd/2.*/*.so
+rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 
 %files
-%defattr(0644, root, root, 0755)
 %doc README AUTHORS
-%{_sysconfdir}/dbus-1/system.d/org.freedesktop.ModemManager.conf
+%{_sysconfdir}/dbus-1/system.d/org.freedesktop.ModemManager1.conf
 %{_datadir}/dbus-1/interfaces/*.xml
-%{_datadir}/dbus-1/system-services/org.freedesktop.ModemManager.service
-%dir %{_includedir}/mm
-%{_includedir}/mm/ModemManager.h
-%attr(0755,root,root) %{_sbindir}/modem-manager
+%{_datadir}/dbus-1/system-services/org.freedesktop.ModemManager1.service
+%{_datadir}/polkit-1/actions/org.freedesktop.ModemManager1.policy
+%{_iconsdir}/hicolor/22x22/apps/ModemManager.png
+%{_bindir}/mmcli
+%{_sbindir}/ModemManager
 %dir %{_libdir}/%{srcname}
-%attr(0755,root,root) %{_libdir}/%{srcname}/*.so*
+%{_libdir}/%{srcname}/*.so
 /lib/udev/rules.d/*
+%{_mandir}/man8/ModemManager.8*
+%{_mandir}/man8/mmcli.8*
 
+%files -n %{libname}
+%{_libdir}/libmm-glib.so.%{major}*
 
-%changelog
-* Thu Mar 29 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.5.2.0-1
-+ Revision: 788069
-- do autoreconf in %%prep
-- clean out old junk
-- use pkgconfig() deps for buildrequires
-- new version
-
-* Fri May 06 2011 Funda Wang <fwang@mandriva.org> 0.4-2
-+ Revision: 669921
-- disable werror
-
-  + Oden Eriksson <oeriksson@mandriva.com>
-    - mass rebuild
-
-* Sun Jul 18 2010 Andrey Borzenkov <arvidjaar@mandriva.org> 0.4-1mdv2011.0
-+ Revision: 554818
-- fix unpackaged files
-- buildrequires intltool
-- buildrequires gettext-devel
-- new version
-
-* Wed Jan 20 2010 Frederik Himpe <fhimpe@mandriva.org> 0.3-1mdv2010.1
-+ Revision: 494267
-- Fix BuildRequires
-- Update to new version 0.3
-
-* Wed Nov 11 2009 Frederik Himpe <fhimpe@mandriva.org> 0.2-0.20090826.1mdv2010.1
-+ Revision: 464873
-- Import package based on Fedora's package
-- create modemmanager
+%files -n %{devname}
+%doc %{_datadir}/gtk-doc/html/libmm-glib
+%doc %{_datadir}/gtk-doc/html/%{srcname}
+%dir %{_includedir}/libmm-glib
+%dir %{_includedir}/%{srcname}
+%{_includedir}/libmm-glib/*.h
+%{_includedir}/%{srcname}/*.h
+%{_libdir}/*.so
+%{_libdir}/pkgconfig/*
 
