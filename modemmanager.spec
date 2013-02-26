@@ -20,6 +20,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/ModemManager/%{url_ver}/%{srcnam
 
 BuildRequires:	dia
 BuildRequires:	intltool
+BuildRequires:	gtk-doc
 BuildRequires:	ppp
 BuildRequires:	xsltproc
 BuildRequires:	gettext-devel
