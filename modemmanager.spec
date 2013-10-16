@@ -12,7 +12,7 @@
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
 Version:	0.7.990
-Release:	4
+Release:	5
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.gnome.org/projects/NetworkManager/
