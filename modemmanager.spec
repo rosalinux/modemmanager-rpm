@@ -1,24 +1,23 @@
-%define	_disable_ld_no_undefined 1
+#define	_disable_ld_no_undefined 1
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 
-%define pppver	%(rpm -q --qf "%{VERSION}" ppp)
-%define pppddir	%{_libdir}/pppd/%{pppver}
+%define pppver %(rpm -q --qf "%{VERSION}" ppp)
+%define pppddir %{_libdir}/pppd/%{pppver}
 %define srcname ModemManager
 
-%define	major	0
-%define	libname	%mklibname mm-glib %{major}
-%define	devname	%mklibname mm-glib -d
+%define major 0
+%define libname %mklibname mm-glib %{major}
+%define devname %mklibname mm-glib -d
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	0.7.990
-Release:	9
+Version:	1.0.0
+Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
-Url:		http://www.gnome.org/projects/NetworkManager/
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/ModemManager/%{url_ver}/%{srcname}-%{version}.tar.xz
+Url:		http://www.freedesktop.org/software/ModemManager/%{srcname}-%{version}.tar.xz
+Source0:	http://www.freedesktop.org/software/ModemManager/%{srcname}-%{version}.tar.xz
 
-BuildRequires:	dia
 BuildRequires:	intltool
 BuildRequires:	gtk-doc
 BuildRequires:	ppp
@@ -27,8 +26,8 @@ BuildRequires:	gettext-devel
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gudev-1.0)
-BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(qmi-glib)
+BuildRequires:	systemd
 
 %description
 The ModemManager service provides a consistent API to operate many different
@@ -54,24 +53,40 @@ Files for development with %{name}.
 
 %build
 %configure2_5x \
-	--disable-static \
-	--enable-more-warnings=no \
+	--enable-more-warnings=error \
 	--with-udev-base-dir=/lib/udev \
-	--with-polkit=yes \
-	--with-tests=yes \
-	--with-docs=yes \
-	--with-pppd-plugin-dir="%{pppddir}"
+	--enable-gtk-doc=yes \
+	--with-polkit=no \
+	--with-systemdsystemunitdir=%{_unitdir} \
+	--disable-static \
+	--with-qmi=yes \
+	--without-mbim \
+    --with-pppd-plugin-dir="%{pppddir}"
 
 %make 
 
 %check
-%make check
+make check
 
 %install
 %makeinstall_std
 
 # only used by test suite
 rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
+
+%triggerin -- %{name} < 1.0.0-1
+/bin/systemctl enable %{srcname}.service
+/bin/systemctl start %{srcname}.service
+
+%post
+%systemd_post %{srcname}.service
+
+%preun
+%systemd_preun %{srcname}.service
+
+%postun
+%systemd_postun
+
 
 %files
 %doc README AUTHORS
