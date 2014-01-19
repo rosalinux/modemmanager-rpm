@@ -1,4 +1,4 @@
-#define	_disable_ld_no_undefined 1
+%define	_disable_ld_no_undefined 1
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 
 %define pppver %(rpm -q --qf "%{VERSION}" ppp)
@@ -23,6 +23,7 @@ BuildRequires:	gtk-doc
 BuildRequires:	ppp
 BuildRequires:	xsltproc
 BuildRequires:	gettext-devel
+BuildRequires: pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gudev-1.0)
@@ -56,7 +57,7 @@ Files for development with %{name}.
 	--enable-more-warnings=error \
 	--with-udev-base-dir=/lib/udev \
 	--enable-gtk-doc=yes \
-	--with-polkit=no \
+	--with-polkit=yes \
 	--with-systemdsystemunitdir=%{_unitdir} \
 	--disable-static \
 	--with-qmi=yes \
