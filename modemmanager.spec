@@ -11,11 +11,11 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.0.0
+Version:	1.2.0
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
-Url:		http://www.freedesktop.org/software/ModemManager/%{srcname}-%{version}.tar.xz
+Url:		http://www.freedesktop.org/software/ModemManager
 Source0:	http://www.freedesktop.org/software/ModemManager/%{srcname}-%{version}.tar.xz
 
 BuildRequires:	intltool
