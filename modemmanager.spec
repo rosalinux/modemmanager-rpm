@@ -90,7 +90,7 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %postun
 %systemd_postun
 
-%files -f %{name}.lng
+%files -f %{name}.lang
 %doc README AUTHORS
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.ModemManager1.conf
 %{_datadir}/dbus-1/interfaces/*.xml
