@@ -75,6 +75,8 @@ make check
 # only used by test suite
 rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 
+%find_lang %{srcname}
+
 %triggerin -- %{name} < 1.0.0-1
 /bin/systemctl enable %{srcname}.service
 /bin/systemctl start %{srcname}.service
@@ -88,8 +90,7 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %postun
 %systemd_postun
 
-
-%files
+%files -f %{name}.lng
 %doc README AUTHORS
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.ModemManager1.conf
 %{_datadir}/dbus-1/interfaces/*.xml
