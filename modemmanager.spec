@@ -12,7 +12,7 @@
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
 Version:	1.2.0
-Release:	2
+Release:	5
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.freedesktop.org/software/ModemManager
@@ -29,6 +29,8 @@ BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gudev-1.0)
 BuildRequires:	pkgconfig(qmi-glib)
 BuildRequires:	systemd
+Requires:	mobile-broadband-provider-info
+Requires:	usb-modeswitch
 
 %description
 The ModemManager service provides a consistent API to operate many different
