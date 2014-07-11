@@ -12,7 +12,7 @@
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
 Version:	1.2.0
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.freedesktop.org/software/ModemManager
