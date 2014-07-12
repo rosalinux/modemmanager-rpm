@@ -30,7 +30,7 @@ BuildRequires:	pkgconfig(gudev-1.0)
 BuildRequires:	pkgconfig(qmi-glib)
 BuildRequires:	systemd
 Requires:	mobile-broadband-provider-info
-Requires:	usb-modeswitch
+Requires:	usb_modeswitch
 
 %description
 The ModemManager service provides a consistent API to operate many different
