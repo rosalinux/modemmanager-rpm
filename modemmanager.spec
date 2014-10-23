@@ -55,8 +55,8 @@ Files for development with %{name}.
 %setup -qn %{srcname}-%{version}
 
 %build
-%configure2_5x \
-	--enable-more-warnings=error \
+%configure \
+	--enable-more-warnings=no \
 	--with-udev-base-dir=/lib/udev \
 	--enable-gtk-doc=yes \
 	--with-polkit=yes \
