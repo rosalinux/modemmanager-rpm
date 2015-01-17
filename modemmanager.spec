@@ -11,8 +11,8 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.4.0
-Release:	2
+Version:	1.4.2
+Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.freedesktop.org/software/ModemManager
@@ -64,9 +64,9 @@ Files for development with %{name}.
 	--disable-static \
 	--with-qmi=yes \
 	--without-mbim \
-    --with-pppd-plugin-dir="%{pppddir}"
+	--with-pppd-plugin-dir="%{pppddir}"
 
-%make 
+%make
 
 %check
 make check
