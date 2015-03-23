@@ -11,7 +11,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.4.4
+Version:	1.4.6
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
@@ -82,15 +82,6 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %triggerin -- %{name} < 1.0.0-1
 /bin/systemctl enable %{srcname}.service
 /bin/systemctl start %{srcname}.service
-
-%post
-%systemd_post %{srcname}.service
-
-%preun
-%systemd_preun %{srcname}.service
-
-%postun
-%systemd_postun
 
 %files -f %{srcname}.lang
 %doc README AUTHORS
