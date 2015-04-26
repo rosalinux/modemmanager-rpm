@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   ModemManager-1.4.6.tar.xz: 30d76b1a8e1d4f84ac26141482afafcb51a0a2c9
+sources:
+  ModemManager-1.4.8.tar.xz: 9c2813b7f4359c34773c1c6ceb13f3a2e3adc6cb
