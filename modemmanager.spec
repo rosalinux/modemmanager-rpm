@@ -11,24 +11,18 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.4.8
-Release:	2
+Version:	1.4.12
+Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.freedesktop.org/software/ModemManager
 Source0:	http://www.freedesktop.org/software/ModemManager/%{srcname}-%{version}.tar.xz
-
-BuildRequires:	intltool
-BuildRequires:	gtk-doc
-BuildRequires:	ppp
-BuildRequires:	xsltproc
-BuildRequires:	gettext-devel
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gudev-1.0)
 BuildRequires:	pkgconfig(qmi-glib)
-BuildRequires:	systemd
+BuildRequires:	pkgconfig(mbim-glib)
 Requires:	mobile-broadband-provider-info
 Requires:	usb_modeswitch
 
@@ -56,15 +50,8 @@ Files for development with %{name}.
 
 %build
 %configure \
-	--enable-more-warnings=no \
-	--with-udev-base-dir=/lib/udev \
-	--enable-gtk-doc=yes \
-	--with-polkit=yes \
 	--with-systemdsystemunitdir=%{_unitdir} \
-	--disable-static \
-	--with-qmi=yes \
-	--without-mbim \
-	--with-pppd-plugin-dir="%{pppddir}"
+	--with-newest-qmi-commands
 
 %make
 
@@ -111,4 +98,3 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %{_includedir}/%{srcname}/*.h
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*
-
