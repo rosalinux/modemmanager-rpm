@@ -53,8 +53,7 @@ Files for development with %{name}.
 
 %build
 %configure \
-	--with-systemdsystemunitdir=%{_unitdir} \
-	--with-newest-qmi-commands
+	--with-systemdsystemunitdir=%{_unitdir}
 
 %make
 
