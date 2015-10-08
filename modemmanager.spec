@@ -17,6 +17,7 @@ License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.freedesktop.org/software/ModemManager
 Source0:	http://www.freedesktop.org/software/ModemManager/%{srcname}-%{version}.tar.xz
+Patch0:		ModemManager-1.4.12-remove-not-needed-static-const-char.patch
 BuildRequires:	intltool
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(dbus-glib-1)
@@ -48,6 +49,7 @@ Files for development with %{name}.
 
 %prep
 %setup -qn %{srcname}-%{version}
+%apply_patches
 
 %build
 %configure \
