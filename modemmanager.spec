@@ -52,6 +52,10 @@ Files for development with %{name}.
 %apply_patches
 
 %build
+# (tpg) fix clang issue
+export CFLAGS="$CFLAGS -Wno-error=unused-const-variable"
+export CXXFLAGS="$CXXCLAGS -Wno-error=unused-const-variable"
+
 %configure \
 	--with-systemdsystemunitdir=%{_unitdir}
 
