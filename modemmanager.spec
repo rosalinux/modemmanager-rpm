@@ -17,6 +17,7 @@ License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.freedesktop.org/software/ModemManager
 Source0:	http://www.freedesktop.org/software/ModemManager/%{srcname}-%{version}.tar.xz
+Source1:	%{name}.rpmlintrc
 BuildRequires:	intltool
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(dbus-glib-1)
