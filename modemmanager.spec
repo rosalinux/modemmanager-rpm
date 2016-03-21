@@ -53,8 +53,8 @@ Files for development with %{name}.
 
 %build
 # (tpg) fix clang issue
-export CFLAGS="$CFLAGS -Wno-error=unused-const-variable"
-export CXXFLAGS="$CXXCLAGS -Wno-error=unused-const-variable"
+export CFLAGS="$CFLAGS -Wno-error=unused-const-variable -Wno-error=enum-conversion"
+export CXXFLAGS="$CXXCLAGS -Wno-error=unused-const-variable -Wno-error=enum-conversion"
 
 %configure \
 	--with-systemdsystemunitdir=%{_unitdir}
