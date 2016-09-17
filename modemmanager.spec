@@ -12,7 +12,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.4.14
+Version:	1.4.16
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
@@ -57,7 +57,7 @@ export CFLAGS="$CFLAGS -Wno-error=unused-const-variable -Wno-error=enum-conversi
 export CXXFLAGS="$CXXCLAGS -Wno-error=unused-const-variable -Wno-error=enum-conversion"
 
 %configure \
-	--with-systemdsystemunitdir=%{_unitdir}
+	--with-systemdsystemunitdir=%{_systemunitdir}
 
 %make
 
@@ -88,7 +88,7 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %dir %{_libdir}/%{srcname}
 %{_libdir}/%{srcname}/*.so
 /lib/udev/rules.d/*
-%{_unitdir}/ModemManager.service
+%{_systemunitdir}/ModemManager.service
 %{_mandir}/man8/ModemManager.8*
 %{_mandir}/man8/mmcli.8*
 
