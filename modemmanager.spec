@@ -12,7 +12,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.4.18
+Version:	1.4.20
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
