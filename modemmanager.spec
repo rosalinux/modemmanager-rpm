@@ -12,7 +12,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.4.20
+Version:	1.6.10
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
@@ -84,6 +84,7 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %{_datadir}/polkit-1/actions/org.freedesktop.ModemManager1.policy
 %{_iconsdir}/hicolor/22x22/apps/ModemManager.png
 %{_bindir}/mmcli
+%{_datadir}/bash-completion/completions/mmcli
 %{_sbindir}/ModemManager
 %dir %{_libdir}/%{srcname}
 %{_libdir}/%{srcname}/*.so
@@ -102,3 +103,7 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %{_includedir}/%{srcname}/*.h
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*
+%{_libdir}/girepository-1.0/ModemManager-1.0.typelib
+%{_datadir}/gir-1.0/ModemManager-1.0.gir
+%{_datadir}/vala/vapi/libmm-glib.deps
+%{_datadir}/vala/vapi/libmm-glib.vapi
