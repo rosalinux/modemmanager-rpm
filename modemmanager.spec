@@ -26,6 +26,8 @@ BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gudev-1.0)
 BuildRequires:	pkgconfig(qmi-glib)
 BuildRequires:	pkgconfig(mbim-glib)
+BuildRequires:	vala
+BuildRequires:	gobject-introspection
 Requires:	mobile-broadband-provider-info
 Requires:	usb_modeswitch
 
@@ -57,7 +59,9 @@ export CFLAGS="$CFLAGS -Wno-error=unused-const-variable -Wno-error=enum-conversi
 export CXXFLAGS="$CXXCLAGS -Wno-error=unused-const-variable -Wno-error=enum-conversion"
 
 %configure \
-	--with-systemdsystemunitdir=%{_systemunitdir}
+	--with-systemdsystemunitdir=%{_systemunitdir} \
+	--enable-vala \
+	--enable-introspection
 
 %make
 
