@@ -26,8 +26,8 @@ BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gudev-1.0)
 BuildRequires:	pkgconfig(qmi-glib)
 BuildRequires:	pkgconfig(mbim-glib)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	vala
-BuildRequires:	gobject-introspection
 Requires:	mobile-broadband-provider-info
 Requires:	usb_modeswitch
 
