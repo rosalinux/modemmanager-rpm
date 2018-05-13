@@ -10,10 +10,12 @@
 %define libname %mklibname mm-glib %{major}
 %define devname %mklibname mm-glib -d
 
+%bcond_with vala
+
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
 Version:	1.7.991
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.freedesktop.org/software/ModemManager
@@ -27,8 +29,10 @@ BuildRequires:	pkgconfig(gudev-1.0)
 BuildRequires:	pkgconfig(qmi-glib)
 BuildRequires:	pkgconfig(mbim-glib)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
+%if %{with vala}
 BuildRequires:	vala
 BuildRequires:	pkgconfig(vapigen) >= 0.18
+%endif
 Requires:	mobile-broadband-provider-info
 Requires:	usb_modeswitch
 
@@ -61,7 +65,11 @@ export CXXFLAGS="$CXXCLAGS -Wno-error=unused-const-variable -Wno-error=enum-conv
 
 %configure \
 	--with-systemdsystemunitdir=%{_systemunitdir} \
+%if %{with vala}
 	--enable-vala \
+%else
+	--disable-vala \
+%endif
 	--enable-introspection
 
 %make
@@ -113,5 +121,7 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %{_libdir}/pkgconfig/*
 %{_libdir}/girepository-1.0/ModemManager-1.0.typelib
 %{_datadir}/gir-1.0/ModemManager-1.0.gir
+%if %{with vala}
 %{_datadir}/vala/vapi/libmm-glib.deps
 %{_datadir}/vala/vapi/libmm-glib.vapi
+%endif
