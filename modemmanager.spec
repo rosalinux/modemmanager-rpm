@@ -61,8 +61,7 @@ Files for development with %{name}.
 
 %build
 # (tpg) fix clang issue
-export CFLAGS="$CFLAGS -Wno-error=unused-const-variable -Wno-error=enum-conversion -Wno-error=unused-but-set-variable"
-export CXXFLAGS="$CXXCLAGS -Wno-error=unused-const-variable -Wno-error=enum-conversion -Wno-error=unused-but-set-variable"
+%global optflags %{optflags} -Qunused-arguments -Wno-error=unused-const-variable -Wno-error=enum-conversion -Wno-error=unused-but-set-variable
 
 %configure \
 	--with-systemdsystemunitdir=%{_systemunitdir} \
