@@ -60,12 +60,9 @@ Files for development with %{name}.
 %setup -qn %{srcname}-%{version}
 
 %build
-# (tpg) fix clang issue
-%global optflags %{optflags} -Qunused-arguments -Wno-error=unused-const-variable -Wno-error=enum-conversion -Wno-error=unused-but-set-variable
-
 %configure \
 	--with-systemdsystemunitdir=%{_systemunitdir} \
-	--disable-warnings-as-errors \
+	--enable-more-warnings=no \
 %if %{with vala}
 	--enable-vala \
 %else
