@@ -30,6 +30,7 @@ BuildRequires:	pkgconfig(qmi-glib)
 BuildRequires:	pkgconfig(mbim-glib)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	systemd-macros
 %if %{with vala}
 BuildRequires:	vala
 BuildRequires:	pkgconfig(vapigen) >= 0.18
@@ -61,7 +62,7 @@ Files for development with %{name}.
 
 %build
 %configure \
-	--with-systemdsystemunitdir=%{_systemunitdir} \
+	--with-systemdsystemunitdir=%{_unitdir} \
 	--enable-more-warnings=no \
 %if %{with vala}
 	--enable-vala \
@@ -103,7 +104,7 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %dir %{_libdir}/%{srcname}
 %{_libdir}/%{srcname}/*.so
 /lib/udev/rules.d/*
-%{_systemunitdir}/ModemManager.service
+%{_unitdir}/ModemManager.service
 %{_mandir}/man8/ModemManager.8*
 %{_mandir}/man8/mmcli.8*
 
