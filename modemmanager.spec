@@ -105,6 +105,7 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %{_libdir}/%{srcname}/*.so
 /lib/udev/rules.d/*
 %{_unitdir}/ModemManager.service
+%{_mandir}/man1/mmcli.1*
 %{_mandir}/man8/ModemManager.8*
 
 %files -n %{libname}
