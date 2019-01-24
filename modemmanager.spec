@@ -71,7 +71,7 @@ Files for development with %{name}.
 %endif
 	--enable-introspection
 
-%make
+%make_build
 
 %check
 # The test suite wants to talk to stuff over dbus, which doesn't
@@ -80,7 +80,7 @@ Files for development with %{name}.
 make check || :
 
 %install
-%makeinstall_std
+%make_install
 
 # only used by test suite
 rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
