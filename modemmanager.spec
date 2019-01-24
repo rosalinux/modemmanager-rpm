@@ -14,7 +14,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.9.990
+Version:	1.10.0
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
