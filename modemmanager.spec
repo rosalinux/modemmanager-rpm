@@ -14,7 +14,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.10.0
+Version:	1.10.2
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
@@ -58,7 +58,7 @@ Requires:	%{libname} = %{version}-%{release}
 Files for development with %{name}.
 
 %prep
-%setup -qn %{srcname}-%{version}
+%autosetup -n %{srcname}-%{version} -p1
 
 %build
 %configure \
