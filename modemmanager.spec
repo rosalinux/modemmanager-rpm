@@ -97,6 +97,8 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %{_datadir}/dbus-1/interfaces/*.xml
 %{_datadir}/dbus-1/system-services/org.freedesktop.ModemManager1.service
 %{_datadir}/polkit-1/actions/org.freedesktop.ModemManager1.policy
+%dir %{_datadir}/ModemManager
+%{_datadir}/ModemManager/*.conf
 %{_iconsdir}/hicolor/22x22/apps/ModemManager.png
 %{_bindir}/mmcli
 %{_datadir}/bash-completion/completions/mmcli
