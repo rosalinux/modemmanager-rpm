@@ -32,6 +32,7 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	systemd-macros
 BuildRequires:	autoconf-archive
+BuildRequires:	xsltproc
 %if %{with vala}
 BuildRequires:	vala
 BuildRequires:	pkgconfig(vapigen) >= 0.18
