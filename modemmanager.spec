@@ -14,7 +14,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.12.10
+Version:	1.14.2
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
@@ -26,7 +26,7 @@ BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gudev-1.0)
-BuildRequires:	pkgconfig(qmi-glib)
+BuildRequires:	pkgconfig(qmi-glib) >= 1.26.0
 BuildRequires:	pkgconfig(mbim-glib)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libsystemd)
@@ -63,6 +63,8 @@ Files for development with %{name}.
 %build
 %configure \
 	--with-systemdsystemunitdir=%{_unitdir} \
+	--with-at-command-via-dbus \
+	--with-polkit=permissive \
 	--enable-more-warnings=no \
 %if %{with vala}
 	--enable-vala \
