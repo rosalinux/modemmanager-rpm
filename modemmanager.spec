@@ -15,7 +15,7 @@
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
 Version:	1.14.2
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.freedesktop.org/software/ModemManager
@@ -89,6 +89,17 @@ make check || :
 # only used by test suite
 rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 
+# Let's relax polkit rules some more, beyond "permissive".
+# It's useful for an admin user to be able to send SMS messages
+# etc. without being "active".
+mkdir -p %{buildroot}%{_datadir}/polkit-1/rules.d
+cat >%{buildroot}%{_datadir}/polkit-1/rules.d/org.freedesktop.ModemManager1.rules <<'EOF'
+polkit.addRule(function(action, subject) {
+	if (action.id.startsWith("org.freedesktop.ModemManager1") && subject.isInGroup("wheel"))
+		return polkit.Result.YES;
+});
+EOF
+
 %find_lang %{srcname}
 
 %triggerin -- %{name} < 1.0.0-1
@@ -101,6 +112,7 @@ rm -f %{buildroot}%{pppddir}/mm-test-pppd-plugin.so
 %{_datadir}/dbus-1/interfaces/*.xml
 %{_datadir}/dbus-1/system-services/org.freedesktop.ModemManager1.service
 %{_datadir}/polkit-1/actions/org.freedesktop.ModemManager1.policy
+%{_datadir}/polkit-1/rules.d/org.freedesktop.ModemManager1.rules
 %dir %{_datadir}/ModemManager
 %{_datadir}/ModemManager/*.conf
 %{_iconsdir}/hicolor/22x22/apps/ModemManager.png
