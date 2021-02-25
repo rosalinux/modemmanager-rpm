@@ -10,11 +10,13 @@
 %define libname %mklibname mm-glib %{major}
 %define devname %mklibname mm-glib -d
 
+%global __provides_exclude ^libmm-plugin-
+
 %bcond_with vala
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.14.8
+Version:	1.14.10
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
@@ -65,6 +67,9 @@ Files for development with %{name}.
 %build
 %configure \
 	--with-systemdsystemunitdir=%{_unitdir} \
+	--with-udev-base-dir=/lib/udev \
+	--with-systemd-journal=yes \
+	--with-dist-version="%{EVRD}" \
 	--with-at-command-via-dbus \
 	--with-polkit=permissive \
 	--enable-more-warnings=no \
@@ -105,6 +110,15 @@ EOF
 %triggerin -- %{name} < 1.0.0-1
 /bin/systemctl enable %{srcname}.service
 /bin/systemctl start %{srcname}.service
+
+%post	
+%systemd_post ModemManager.service
+
+%preun
+%systemd_preun ModemManager.service
+
+%postun
+%systemd_postun ModemManager.service
 
 %files -f %{srcname}.lang
 %doc README AUTHORS
