@@ -1,4 +1,3 @@
-%define debug_package %{nil}
 %define	_disable_ld_no_undefined 1
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 
@@ -16,7 +15,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.14.10
+Version:	1.16.8
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
