@@ -15,7 +15,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.18.2
+Version:	1.18.4
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
@@ -110,7 +110,7 @@ EOF
 /bin/systemctl enable %{srcname}.service
 /bin/systemctl start %{srcname}.service
 
-%post	
+%post
 %systemd_post ModemManager.service
 
 %preun
@@ -127,6 +127,7 @@ EOF
 %{_datadir}/polkit-1/actions/org.freedesktop.ModemManager1.policy
 %{_datadir}/polkit-1/rules.d/org.freedesktop.ModemManager1.rules
 %dir %{_datadir}/ModemManager
+%{_datadir}/ModemManager/fcc-unlock.available.d/*
 %{_datadir}/ModemManager/*.conf
 %{_iconsdir}/hicolor/22x22/apps/ModemManager.png
 %{_bindir}/mmcli
