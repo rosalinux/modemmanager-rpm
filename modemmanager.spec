@@ -15,7 +15,7 @@
 
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
-Version:	1.18.6
+Version:	1.18.8
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
@@ -127,7 +127,10 @@ EOF
 %{_datadir}/polkit-1/actions/org.freedesktop.ModemManager1.policy
 %{_datadir}/polkit-1/rules.d/org.freedesktop.ModemManager1.rules
 %dir %{_datadir}/ModemManager
+%dir %{_datadir}/ModemManager/fcc-unlock.available.d
+%dir %{_datadir}/ModemManager/connection.available.d
 %{_datadir}/ModemManager/fcc-unlock.available.d/*
+%{_datadir}/ModemManager/connection.available.d/*
 %{_datadir}/ModemManager/*.conf
 %{_iconsdir}/hicolor/22x22/apps/ModemManager.png
 %{_bindir}/mmcli
