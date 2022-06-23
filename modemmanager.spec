@@ -1,4 +1,4 @@
-%define	_disable_ld_no_undefined 1
+%define _disable_ld_no_undefined 1
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 
 %define pppver %(rpm -q --qf "%{VERSION}" ppp)
@@ -16,7 +16,7 @@
 Summary:	Mobile broadband modem management service
 Name:		modemmanager
 Version:	1.18.8
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.freedesktop.org/software/ModemManager
@@ -66,7 +66,7 @@ Files for development with %{name}.
 %build
 %configure \
 	--with-systemdsystemunitdir=%{_unitdir} \
-	--with-udev-base-dir=/lib/udev \
+	--with-udev-base-dir=$(dirname %{_udevrulesdir}) \
 	--with-systemd-journal=yes \
 	--with-dist-version="%{EVRD}" \
 	--with-at-command-via-dbus \
@@ -138,10 +138,10 @@ EOF
 %{_sbindir}/ModemManager
 %dir %{_libdir}/%{srcname}
 %{_libdir}/%{srcname}/*.so
-/lib/udev/rules.d/*
+%{_udevrulesdir}/*
 %{_unitdir}/ModemManager.service
-%{_mandir}/man1/mmcli.1*
-%{_mandir}/man8/ModemManager.8*
+%doc %{_mandir}/man1/mmcli.1*
+%doc %{_mandir}/man8/ModemManager.8*
 
 %files -n %{libname}
 %{_libdir}/libmm-glib.so.%{major}*
