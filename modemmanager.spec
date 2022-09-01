@@ -19,8 +19,7 @@ Version:	1.18.6
 Release:	1
 License:	GPLv2+
 Group:		System/Configuration/Networking
-Url:		http://www.freedesktop.org/software/ModemManager
-Source0:	http://www.freedesktop.org/software/ModemManager/%{srcname}-%{version}.tar.xz
+Source0:	ModemManager.zip
 Source1:	%{name}.rpmlintrc
 BuildRequires:	intltool
 BuildRequires:	pkgconfig(polkit-gobject-1)
@@ -61,7 +60,7 @@ Requires:	%{libname} = %{version}-%{release}
 Files for development with %{name}.
 
 %prep
-%autosetup -n %{srcname}-%{version} -p1
+%setup -n ModemManager-%{lua:print(os.getenv("SRC_BRANCH") or "ayya-mtk-modem")}
 
 %build
 %configure \
